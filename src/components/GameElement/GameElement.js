@@ -1,5 +1,5 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+// import PropTypes from 'prop-types';
 import Circle, {
   InnerCircle,
   OuterCircle,
@@ -9,8 +9,9 @@ import Circle, {
 import rock from '../../assets/images/icon-rock.svg';
 import paper from '../../assets/images/icon-paper.svg';
 import scissors from '../../assets/images/icon-scissors.svg';
+import GameContext from '../store/game-context';
 
-function GameElement({ type }) {
+function GameElement({ type, id }) {
   let imgSrc;
   switch (type) {
     case 'rock':
@@ -26,8 +27,14 @@ function GameElement({ type }) {
       console.log('error');
   }
 
+  const gameCtx = useContext(GameContext);
+
+  const onPlayerChoice = () => {
+    gameCtx.setPlayerChoice(id);
+  };
+
   return (
-    <OuterCircle type={type}>
+    <OuterCircle onClick={onPlayerChoice} type={type} id={id}>
       <Circle type={type}>
         <ShadowCircle>
           <InnerCircle>
@@ -39,7 +46,8 @@ function GameElement({ type }) {
   );
 }
 
-GameElement.propTypes = {
-  type: PropTypes.oneOf(['rock', 'paper', 'scissors']).isRequired,
-};
+// GameElement.propTypes = {
+//   type: PropTypes.oneOf(['rock', 'paper', 'scissors']).isRequired,
+//   id: PropTypes.string.isRequired,
+// };
 export default GameElement;

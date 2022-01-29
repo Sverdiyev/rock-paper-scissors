@@ -12,6 +12,10 @@ const GlobalStyles = createGlobalStyle`${css`
     background-image: radial-gradient(at top, #1f3757, #131537);
     background-size: 100%;
   }
+  #root {
+    height: 100%;
+    width: 100%;
+  }
   * {
     box-sizing: border-box;
   }
