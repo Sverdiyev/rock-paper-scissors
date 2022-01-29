@@ -6,7 +6,7 @@ import Wrapper from './components/Layout/Wrapper/Wrapper';
 function App() {
   return (
     <Wrapper>
-      <Header>1</Header>
+      <Header />
       <Main>
         <GameElement type="rock" />
       </Main>

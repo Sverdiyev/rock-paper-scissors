@@ -19,6 +19,7 @@ export const OuterCircle = styled.div`
   background-color: ${({ type }) => getSecondaryColor(type)};
   width: ${(p) => (p.theme.deviceWidth * 198) / 10}rem;
   height: ${(p) => (p.theme.deviceWidth * 203) / 10}rem;
+  cursor: pointer;
 `;
 
 const Circle = styled.div`

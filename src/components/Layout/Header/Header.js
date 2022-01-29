@@ -1,13 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import StyledHeader from './Header.styles';
+// import PropTypes from 'prop-types';
+import StyledHeader from './StyledHeader.styles';
+import Score from '../../Score/Score';
+import logo from '../../../assets/images/logo.svg';
 
-function Header({ children }) {
-  return <StyledHeader>{children}</StyledHeader>;
+function Header() {
+  return (
+    <StyledHeader>
+      <img src={logo} alt="Logo" />
+      <Score />
+    </StyledHeader>
+  );
 }
 
-Header.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+// Header.propTypes = {
+//   children: PropTypes.node.isRequired,
+// };
 
 export default Header;

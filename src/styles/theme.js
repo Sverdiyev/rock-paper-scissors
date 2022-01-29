@@ -1,12 +1,12 @@
 const theme = {
   colors: {
-    dark: 'hsl(229, 25%, 31%)',
-    blue: 'hsl(229, 64%, 46%)',
-    // grey: 'hsl(217, 16%, 45%)',
+    dark: '#3b4363',
+    blue: '#2a46c0',
+    grey2: '#D8D8D8',
     grey: '#BABFD4',
   },
   gradients: {
-    yellow: 'hsl(39, 89%, 49%) to hsl(40, 84%, 53%)',
+    yellow: '#ec9e0e to #eca922',
     blue: 'hsl(230, 89%, 62%) to hsl(230, 89%, 65%)',
     red: 'hsl(349, 71%, 52%) to hsl(349, 70%, 56%)',
     purple: 'hsl(261, 73%, 60%) to hsl(261, 72%, 63%)',
