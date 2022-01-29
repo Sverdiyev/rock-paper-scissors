@@ -15,8 +15,6 @@ const initialState = {
 
 const calculateWinner = (choice) => {
   const opponentChoice = calculateComputerChoice();
-  console.log('🚀 ~ calculateWinner ~ choice', choice);
-  console.log('🚀 ~ calculateWinner ~ opponentChoice', opponentChoice);
   if (choice === opponentChoice) return 'draw';
 
   switch (choice) {
@@ -71,4 +69,4 @@ export function GameContextProvider({ children }) {
   );
 }
 
-export default GameContext;
+export default GameContextProvider;

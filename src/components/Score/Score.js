@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ScoreNumber, ScoreSpan, StyledDiv } from './Score.styles';
+import GameContext from '../store/game-context';
 
 function Score() {
+  const gameCtx = useContext(GameContext);
   return (
     <StyledDiv>
       <ScoreSpan>score</ScoreSpan>
-      <ScoreNumber>12</ScoreNumber>
+      <ScoreNumber>{gameCtx.score}</ScoreNumber>
     </StyledDiv>
   );
 }
