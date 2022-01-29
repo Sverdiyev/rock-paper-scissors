@@ -2,7 +2,12 @@ const theme = {
   colors: {
     dark: 'hsl(229, 25%, 31%)',
     blue: 'hsl(229, 64%, 46%)',
-    grey: 'hsl(217, 16%, 45%)',
+    lightBlue: '#4664F4',
+    darkBlue: '#2A45C2',
+    // grey: 'hsl(217, 16%, 45%)',
+    grey: '#BABFD4',
+    white: '#DADADA',
+    grey2: '#F3f3f3',
   },
   gradients: {
     yellow: 'hsl(39, 89%, 49%) to hsl(40, 84%, 53%)',
@@ -21,7 +26,8 @@ const theme = {
     bold: 800,
   },
   fontFamily: 'Barlow Semi Condensed',
-  dimensions: { height: { regular: '19.4rem' }, width: { regular: '19.8rem' } },
+  deviceWidth: 1,
+  deviceHeight: 1,
 };
 
 export default theme;
