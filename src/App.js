@@ -3,7 +3,7 @@ import Footer from './components/Layout/Footer/Footer';
 import Header from './components/Layout/Header/Header';
 import Main from './components/Layout/Main/Main';
 import Wrapper from './components/Layout/Wrapper/Wrapper';
-import GameContext from './components/store/game-context';
+import GameContext from './components/store/GameContext';
 
 function App() {
   const gameCtx = useContext(GameContext);

@@ -9,9 +9,9 @@ import Circle, {
 import rock from '../../assets/images/icon-rock.svg';
 import paper from '../../assets/images/icon-paper.svg';
 import scissors from '../../assets/images/icon-scissors.svg';
-import GameContext from '../store/game-context';
+import GameContext from '../store/GameContext';
 
-function GameElement({ type, id }) {
+function GameElement({ type, gameId, player = false }) {
   let imgSrc;
   switch (type) {
     case 'rock':
@@ -30,15 +30,19 @@ function GameElement({ type, id }) {
   const gameCtx = useContext(GameContext);
 
   const onPlayerChoice = () => {
-    gameCtx.setPlayerChoice(id);
+    if (gameCtx.gameFinished) return;
+    gameCtx.setPlayerChoice(gameId);
   };
+  const options = { type, gameState: gameCtx.gameState, player };
+
+  const showPicture = gameCtx.gameState !== 'waiting' || player;
 
   return (
-    <OuterCircle onClick={onPlayerChoice} type={type} id={id}>
-      <Circle type={type}>
-        <ShadowCircle>
-          <InnerCircle>
-            <img src={imgSrc} alt={type} />
+    <OuterCircle onClick={onPlayerChoice} gameId={gameId} {...options}>
+      <Circle {...options}>
+        <ShadowCircle {...options}>
+          <InnerCircle {...options}>
+            {showPicture && <img src={imgSrc} alt={type} />}
           </InnerCircle>
         </ShadowCircle>
       </Circle>

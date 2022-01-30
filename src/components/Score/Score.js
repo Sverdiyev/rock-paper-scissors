@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
+import GameContext from '../store/GameContext';
 import { ScoreNumber, ScoreSpan, StyledDiv } from './Score.styles';
-import GameContext from '../store/game-context';
 
 function Score() {
   const gameCtx = useContext(GameContext);

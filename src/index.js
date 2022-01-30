@@ -7,6 +7,10 @@ import { GameContextProvider } from './components/store/GameContextProvider';
 import GlobalStyles from './styles/GlobalStyles';
 import theme from './styles/theme';
 
+// FIXME:
+
+//! asdasd
+// TODO: add two themes - for mobile and desktop
 ReactDOM.render(
   <React.StrictMode>
     <GameContextProvider>

@@ -27,6 +27,7 @@
     "react/react-in-jsx-scope": "off",
     "no-console": "off",
     "react/prop-types": "off",
-    "consistent-return": "off"
+    "consistent-return": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }

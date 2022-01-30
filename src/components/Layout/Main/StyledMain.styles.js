@@ -3,7 +3,8 @@ import img from '../../../assets/images/bg-triangle.svg';
 
 const StyledMain = styled.main`
   width: 50%;
-  padding: 0 ${(p) => (p.gameStatus === 'ready' ? '0' : '5%')};
+  margin-top: 4%;
+  padding: 0 ${(p) => (p.gameState !== 'ready' ? '0' : '5%')};
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -11,7 +12,7 @@ const StyledMain = styled.main`
   background-size: 45%;
   background-repeat: no-repeat;
   background-position: center;
-  ${(p) => (p.gameStatus === 'ready' ? 'background: none' : '')};
+  ${(p) => (p.gameState !== 'ready' ? 'background: none;' : '')};
 `;
 export const Break = styled.div`
   flex-basis: 100%;
