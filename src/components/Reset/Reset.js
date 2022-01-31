@@ -5,7 +5,7 @@ function Reset() {
   const gameCtx = useContext(GameContext);
   return (
     <button type="button" onClick={gameCtx.resetGame}>
-      Reset
+      Play Again
     </button>
   );
 }

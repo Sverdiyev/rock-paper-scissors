@@ -7,29 +7,32 @@ const allColors = {
   shadow: { primary: '#DADADA, #F3f3f3', secondary: '#BABFD4' },
   waiting: {
     primary: 'rgba(0, 0, 0, 0.1)',
+    secondary: 'transparent',
   },
 };
 
-const getPrimaryColor = (type, gameState, player) => {
-  if (gameState === 'waiting' && !player) return 'transparent';
+// FIXME: need to find a way to properly show colors
+
+const getPrimaryColor = (type) => {
+  if (type === 'waiting') return 'transparent';
   return allColors[type].primary;
 };
 
-const getSecondaryColor = (type, gameState, player) => {
-  if (gameState === 'waiting' && !player) return 'transparent';
+const getSecondaryColor = (type) => {
+  if (type === 'waiting') return 'transparent';
   return allColors[type].secondary;
 };
-const getAwaitingColor = () => allColors.waiting.primary;
+const getAwaitingColor = () => {
+  return allColors.waiting.primary;
+};
 
 export const OuterCircle = styled.div`
-  ${(p) => console.log(p.gameState)}
   display: flex;
   align-items: flex-start;
   justify-content: center;
 
   border-radius: 50%;
-  background-color: ${({ type, gameState, player }) =>
-    getSecondaryColor(type, gameState, player)};
+  background-color: ${({ type }) => getSecondaryColor(type)};
   width: ${(p) =>
     (p.theme.deviceWidth * (p.gameState === 'ready' ? 198 : 292)) / 10}rem;
   height: ${(p) =>
@@ -43,8 +46,7 @@ const Circle = styled.div`
   justify-content: center;
 
   border-radius: 50%;
-  background-color: ${({ type, gameState, player }) =>
-    getPrimaryColor(type, gameState, player)};
+  background-color: ${({ type }) => getPrimaryColor(type)};
   width: ${(p) =>
     (p.theme.deviceWidth * (p.gameState === 'ready' ? 198 : 292)) / 10}rem;
   height: ${(p) =>
@@ -57,9 +59,11 @@ export const ShadowCircle = styled.div`
   justify-content: center;
 
   border-radius: 50%;
-  background-color: ${({ gameState, player }) => {
-    if (gameState === 'waiting') return getAwaitingColor();
-    return getSecondaryColor('shadow', gameState, player);
+  background-color: ${({ gameState }) => {
+    if (gameState === 'waiting') {
+      return getAwaitingColor();
+    }
+    return getSecondaryColor('shadow', gameState);
   }};
 
   width: ${(p) =>
@@ -75,11 +79,14 @@ export const InnerCircle = styled.div`
 
   border-radius: 50%;
   background-image: linear-gradient(
-    ${({ gameState, player }) => getPrimaryColor('shadow', gameState, player)}
+    ${({ type }) => {
+      return getPrimaryColor(type === 'waiting' ? type : 'shadow');
+    }}
   );
+
   width: ${(p) =>
     (p.theme.deviceWidth * (p.gameState === 'ready' ? 152 : 225)) / 10}rem;
   height: ${(p) =>
-    (p.theme.deviceWidth * (p.gameState === 'ready' ? 152 : 212)) / 10}rem;
+    (p.theme.deviceWidth * (p.gameState === 'ready' ? 144 : 212)) / 10}rem;
 `;
 export default Circle;

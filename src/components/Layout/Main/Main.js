@@ -4,28 +4,52 @@ import GameElementLabel from '../../GameElementLabel/GameElementLabel';
 import GameContext from '../../store/GameContext';
 import StyledMain from './StyledMain.styles';
 import Container from '../../Container/Container';
+import GameResult from '../../GameResult/GameResult';
 
 function Main() {
   const options = { 1: 'paper', 2: 'scissors', 3: 'rock' };
   const gameCtx = useContext(GameContext);
-  console.log('🚀 ~ Main ~ gameCtx', gameCtx);
   const { playerChoice, gameState, opponentChoice } = gameCtx;
   const ready = (
     <>
-      <GameElement type="paper" gameId="1" big={1} />
-      <GameElement type="scissors" gameId="2" big={1} />
-      <GameElement type="rock" gameId="3" big={1} />
+      <GameElement type="paper" gameId="1" />
+      <GameElement type="scissors" gameId="2" />
+      <GameElement type="rock" gameId="3" />
     </>
   );
   const waiting = (
     <>
       <Container>
         <GameElementLabel>Your Choice</GameElementLabel>
-        <GameElement type={options[playerChoice]} id={playerChoice} player />
+        <GameElement
+          type={options[playerChoice]}
+          gameId={playerChoice}
+          player
+        />
       </Container>
       <Container>
         <GameElementLabel>Opponent Choice</GameElementLabel>
-        <GameElement type={options[opponentChoice]} id={opponentChoice} />
+        <GameElement type="waiting" gameId={opponentChoice} />
+      </Container>
+    </>
+  );
+
+  const result = (
+    <>
+      <Container>
+        <GameElementLabel>Your Choice</GameElementLabel>
+        <GameElement
+          type={options[playerChoice]}
+          gameId={playerChoice}
+          player
+        />
+      </Container>
+      {/* <Container>
+        <GameResult />
+      </Container> */}
+      <Container>
+        <GameElementLabel>Opponent Choice</GameElementLabel>
+        <GameElement type={options[opponentChoice]} gameId={opponentChoice} />
       </Container>
     </>
   );
@@ -34,6 +58,7 @@ function Main() {
     <StyledMain gameState={gameState}>
       {gameState === 'ready' && !playerChoice && ready}
       {gameState === 'waiting' && waiting}
+      {gameState === 'result' && result}
     </StyledMain>
   );
 }

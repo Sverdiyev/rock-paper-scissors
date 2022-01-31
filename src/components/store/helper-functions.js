@@ -20,3 +20,5 @@ export const calculateWinner = (choice) => {
       return ['draw', opponentChoice];
   }
 };
+
+export const changeStateToResult = async () => {};

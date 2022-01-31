@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import Reset from '../Reset/Reset.styles';
 import GameContext from '../store/GameContext';
 
 function GameResult() {
@@ -7,8 +8,8 @@ function GameResult() {
 
   return (
     <div>
-      <Result winner={winner} />
-      <TryAgain />
+      {/* <Result winner={winner} /> */}
+      <Reset />
     </div>
   );
 }

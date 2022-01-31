@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import img from '../../../assets/images/bg-triangle.svg';
 
 const StyledMain = styled.main`
-  width: 50%;
+  width: ${(p) => (p.gameState === 'finish' ? '70%' : '50%')};
   margin-top: 4%;
   padding: 0 ${(p) => (p.gameState !== 'ready' ? '0' : '5%')};
   display: flex;

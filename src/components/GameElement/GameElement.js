@@ -33,7 +33,8 @@ function GameElement({ type, gameId, player = false }) {
     if (gameCtx.gameFinished) return;
     gameCtx.setPlayerChoice(gameId);
   };
-  const options = { type, gameState: gameCtx.gameState, player };
+  const options = { type, gameState: gameCtx.gameState };
+  // const options = { type, gameState: 'waiting' };
 
   const showPicture = gameCtx.gameState !== 'waiting' || player;
 
