@@ -13,13 +13,13 @@ const allColors = {
 
 // FIXME: need to find a way to properly show colors
 
-const getPrimaryColor = (type, player) => {
-  if (type === 'waiting' && !player) return 'transparent';
+const getPrimaryColor = (type, isTransparent) => {
+  if (isTransparent) return 'transparent';
   return allColors[type].primary;
 };
 
-const getSecondaryColor = (type, player) => {
-  if (type === 'waiting' && !player) return 'transparent';
+const getSecondaryColor = (type, isTransparent) => {
+  if (isTransparent) return 'transparent';
   return allColors[type].secondary;
 };
 const getAwaitingColor = () => {
@@ -32,24 +32,21 @@ export const OuterCircle = styled.div`
       return '';
     }
   }}
-  transform: translateX(200px);
+
   display: flex;
   align-items: flex-start;
   justify-content: center;
 
   border-radius: 50%;
-  background-color: ${({ type, player }) => getSecondaryColor(type, player)};
-  width: ${(p) =>
-    (p.theme.deviceWidth * (p.gameState === 'ready' ? 198 : 292)) / 10}rem;
-  height: ${(p) =>
-    (p.theme.deviceWidth * (p.gameState === 'ready' ? 203 : 300)) / 10}rem;
+  background-color: ${({ type, isTransparent }) =>
+    getSecondaryColor(type, isTransparent)};
+
+  width: ${({ theme, isBig }) =>
+    (theme.deviceWidth * (!isBig ? 198 : 292)) / 10}rem;
+  height: ${({ theme, isBig }) =>
+    (theme.deviceWidth * (!isBig ? 203 : 300)) / 10}rem;
+
   cursor: pointer;
-  @media all and (max-width=700px) {
-    width: ${(p) =>
-      (p.theme.deviceWidth * (p.gameState === 'ready' ? 198 : 292)) / 10}rem;
-    height: ${(p) =>
-      (p.theme.deviceWidth * (p.gameState === 'ready' ? 203 : 300)) / 10}rem;
-  }
 `;
 
 const Circle = styled.div`
@@ -58,11 +55,12 @@ const Circle = styled.div`
   justify-content: center;
 
   border-radius: 50%;
-  background-color: ${({ type, player }) => getPrimaryColor(type, player)};
-  width: ${(p) =>
-    (p.theme.deviceWidth * (p.gameState === 'ready' ? 198 : 292)) / 10}rem;
-  height: ${(p) =>
-    (p.theme.deviceWidth * (p.gameState === 'ready' ? 194 : 287)) / 10}rem;
+  background-color: ${({ type, isTransparent }) =>
+    getPrimaryColor(type, isTransparent)};
+  width: ${({ theme, isBig }) =>
+    (theme.deviceWidth * (!isBig ? 198 : 292)) / 10}rem;
+  height: ${({ theme, isBig }) =>
+    (theme.deviceWidth * (!isBig ? 194 : 287)) / 10}rem;
 `;
 
 export const ShadowCircle = styled.div`
@@ -71,17 +69,17 @@ export const ShadowCircle = styled.div`
   justify-content: center;
 
   border-radius: 50%;
-  background-color: ${({ type, player }) => {
-    if (type === 'waiting') {
+  background-color: ${({ isTransparent }) => {
+    if (isTransparent) {
       return getAwaitingColor();
     }
-    return getSecondaryColor('shadow', player);
+    return getSecondaryColor('shadow', isTransparent);
   }};
 
-  width: ${(p) =>
-    (p.theme.deviceWidth * (p.gameState === 'ready' ? 152 : 225)) / 10}rem;
-  height: ${(p) =>
-    (p.theme.deviceWidth * (p.gameState === 'ready' ? 152 : 225)) / 10}rem;
+  width: ${({ theme, isBig }) =>
+    (theme.deviceWidth * (!isBig ? 152 : 225)) / 10}rem;
+  height: ${({ theme, isBig }) =>
+    (theme.deviceWidth * (!isBig ? 152 : 225)) / 10}rem;
 `;
 
 export const InnerCircle = styled.div`
@@ -91,17 +89,12 @@ export const InnerCircle = styled.div`
 
   border-radius: 50%;
   background-image: linear-gradient(
-    ${({ gameState, player }) => {
-      return getPrimaryColor(
-        gameState === 'waiting' ? gameState : 'shadow',
-        player
-      );
-    }}
+    ${({ isTransparent }) => getPrimaryColor('shadow', isTransparent)}
   );
 
-  width: ${(p) =>
-    (p.theme.deviceWidth * (p.gameState === 'ready' ? 152 : 225)) / 10}rem;
-  height: ${(p) =>
-    (p.theme.deviceWidth * (p.gameState === 'ready' ? 144 : 212)) / 10}rem;
+  width: ${({ theme, isBig }) =>
+    (theme.deviceWidth * (!isBig ? 152 : 225)) / 10}rem;
+  height: ${({ theme, isBig }) =>
+    (theme.deviceWidth * (!isBig ? 144 : 212)) / 10}rem;
 `;
 export default Circle;

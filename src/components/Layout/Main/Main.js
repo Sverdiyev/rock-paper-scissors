@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import GameElement from '../../GameElement/GameElement';
-import GameElementLabel from '../../GameElementLabel/GameElementLabel';
 import GameContext from '../../store/GameContext';
 import StyledMain from './StyledMain.styles';
 import Container from '../../Container/Container';
@@ -20,8 +19,8 @@ function Main() {
   const waiting = (
     <>
       <Container>
-        <GameElementLabel>Your Choice</GameElementLabel>
         <GameElement
+          labelText="Your Choice"
           type={options[playerChoice]}
           gameId={playerChoice}
           gameState={gameCtx.gameState}
@@ -29,8 +28,8 @@ function Main() {
         />
       </Container>
       <Container>
-        <GameElementLabel>Opponent Choice</GameElementLabel>
         <GameElement
+          labelText="Opponent Choice"
           type="waiting"
           gameId={opponentChoice}
           gameState={gameCtx.gameState}
@@ -42,8 +41,8 @@ function Main() {
   const result = (
     <>
       <Container>
-        <GameElementLabel>Your Choice</GameElementLabel>
         <GameElement
+          labelText="Your Choice"
           type={options[playerChoice]}
           gameId={playerChoice}
           gameState={gameCtx.gameState}
@@ -54,8 +53,8 @@ function Main() {
         <GameResult />
       </Container> */}
       <Container>
-        <GameElementLabel>Opponent Choice</GameElementLabel>
         <GameElement
+          labelText="Opponent Choice"
           type={options[opponentChoice]}
           gameId={opponentChoice}
           gameState={gameCtx.gameState}
@@ -64,13 +63,42 @@ function Main() {
     </>
   );
 
+  // {gameState === 'ready' && !playerChoice && ready}
+  // {gameState === 'waiting' && waiting}
+  // {gameState === 'result' && result}
+
+  const playerOptions = {
+    type: !playerChoice ? 'paper' : options[playerChoice],
+    gameId: !playerChoice ? 1 : playerChoice,
+    gameState: gameCtx.gameState,
+    player: !!playerChoice,
+  };
+  console.log('🚀 ~ Main ~ playerOptions', playerOptions);
+
+  const opponentOptions = {
+    type: !opponentChoice ? 'scissors' : options[opponentChoice],
+    gameId: !opponentChoice ? 2 : opponentChoice,
+    gameState: gameCtx.gameState,
+    player: false,
+  };
+  console.log('🚀 ~ Main ~ opponentOptions', opponentOptions);
   return (
     <StyledMain gameState={gameState}>
-      {gameState === 'ready' && !playerChoice && ready}
-      {gameState === 'waiting' && waiting}
-      {gameState === 'result' && result}
+      <GameElement {...playerOptions} />
+      <GameElement {...opponentOptions} />
+      {gameState === 'ready' && (
+        <GameElement type="rock" gameId="3" gameState={gameCtx.gameState} />
+      )}
     </StyledMain>
   );
+
+  // return (
+  //   <StyledMain gameState={gameState}>
+  //     {gameState === 'ready' && !playerChoice && ready}
+  //     {gameState === 'waiting' && waiting}
+  //     {gameState === 'result' && result}
+  //   </StyledMain>
+  // );
 }
 
 export default Main;

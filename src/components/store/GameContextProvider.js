@@ -54,7 +54,7 @@ export function GameContextProvider({ children }) {
     setTimeout(() => {
       console.log('delayed');
       dispatch({ type: ACTIONS.RESULT });
-    }, 2000);
+    }, 1500);
   };
   const resetGame = () => dispatch({ type: ACTIONS.RESET });
   /* eslint-disable */ //FIXME: figure out what to do here

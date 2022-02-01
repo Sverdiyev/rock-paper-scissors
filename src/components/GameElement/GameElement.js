@@ -10,8 +10,9 @@ import rock from '../../assets/images/icon-rock.svg';
 import paper from '../../assets/images/icon-paper.svg';
 import scissors from '../../assets/images/icon-scissors.svg';
 import GameContext from '../store/GameContext';
+import GameElementLabel from '../GameElementLabel/GameElementLabel';
 
-function GameElement({ type, gameId, player = false }) {
+function GameElement({ type, gameId, labelText, player = false }) {
   let imgSrc;
   switch (type) {
     case 'rock':
@@ -28,26 +29,38 @@ function GameElement({ type, gameId, player = false }) {
   }
 
   const gameCtx = useContext(GameContext);
-
+  const { gameState } = gameCtx;
   const onPlayerChoice = () => {
     if (gameCtx.gameFinished) return;
     gameCtx.setPlayerChoice(gameId);
   };
-  const options = { type, gameState: gameCtx.gameState };
-  // const options = { type, gameState: 'waiting' };
 
-  const showPicture = gameCtx.gameState !== 'waiting' || player;
+  const isBig = gameState !== 'ready';
+  const isTransparent = gameState === 'waiting' && !player;
+  const options = {
+    type,
+    isBig,
+    isTransparent,
+  };
+
+  console.log('🚀 ~ GameElement ~ options', options);
+  const showPicture = gameState !== 'waiting' || player;
 
   return (
-    <OuterCircle onClick={onPlayerChoice} gameId={gameId} {...options}>
-      <Circle {...options}>
-        <ShadowCircle {...options}>
-          <InnerCircle {...options}>
-            {showPicture && <img src={imgSrc} alt={type} />}
-          </InnerCircle>
-        </ShadowCircle>
-      </Circle>
-    </OuterCircle>
+    <>
+      {gameState !== 'ready' && (
+        <GameElementLabel>{labelText}</GameElementLabel>
+      )}
+      <OuterCircle onClick={onPlayerChoice} gameId={gameId} {...options}>
+        <Circle {...options}>
+          <ShadowCircle {...options}>
+            <InnerCircle {...options}>
+              {showPicture && <img src={imgSrc} alt={type} />}
+            </InnerCircle>
+          </ShadowCircle>
+        </Circle>
+      </OuterCircle>
+    </>
   );
 }
 
