@@ -13,13 +13,13 @@ const allColors = {
 
 // FIXME: need to find a way to properly show colors
 
-const getPrimaryColor = (type) => {
-  if (type === 'waiting') return 'transparent';
+const getPrimaryColor = (type, player) => {
+  if (type === 'waiting' && !player) return 'transparent';
   return allColors[type].primary;
 };
 
-const getSecondaryColor = (type) => {
-  if (type === 'waiting') return 'transparent';
+const getSecondaryColor = (type, player) => {
+  if (type === 'waiting' && !player) return 'transparent';
   return allColors[type].secondary;
 };
 const getAwaitingColor = () => {
@@ -27,17 +27,29 @@ const getAwaitingColor = () => {
 };
 
 export const OuterCircle = styled.div`
+  ${(p) => {
+    if (p.gameState === 'result') {
+      return '';
+    }
+  }}
+  transform: translateX(200px);
   display: flex;
   align-items: flex-start;
   justify-content: center;
 
   border-radius: 50%;
-  background-color: ${({ type }) => getSecondaryColor(type)};
+  background-color: ${({ type, player }) => getSecondaryColor(type, player)};
   width: ${(p) =>
     (p.theme.deviceWidth * (p.gameState === 'ready' ? 198 : 292)) / 10}rem;
   height: ${(p) =>
     (p.theme.deviceWidth * (p.gameState === 'ready' ? 203 : 300)) / 10}rem;
   cursor: pointer;
+  @media all and (max-width=700px) {
+    width: ${(p) =>
+      (p.theme.deviceWidth * (p.gameState === 'ready' ? 198 : 292)) / 10}rem;
+    height: ${(p) =>
+      (p.theme.deviceWidth * (p.gameState === 'ready' ? 203 : 300)) / 10}rem;
+  }
 `;
 
 const Circle = styled.div`
@@ -46,7 +58,7 @@ const Circle = styled.div`
   justify-content: center;
 
   border-radius: 50%;
-  background-color: ${({ type }) => getPrimaryColor(type)};
+  background-color: ${({ type, player }) => getPrimaryColor(type, player)};
   width: ${(p) =>
     (p.theme.deviceWidth * (p.gameState === 'ready' ? 198 : 292)) / 10}rem;
   height: ${(p) =>
@@ -59,11 +71,11 @@ export const ShadowCircle = styled.div`
   justify-content: center;
 
   border-radius: 50%;
-  background-color: ${({ gameState }) => {
-    if (gameState === 'waiting') {
+  background-color: ${({ type, player }) => {
+    if (type === 'waiting') {
       return getAwaitingColor();
     }
-    return getSecondaryColor('shadow', gameState);
+    return getSecondaryColor('shadow', player);
   }};
 
   width: ${(p) =>
@@ -79,8 +91,11 @@ export const InnerCircle = styled.div`
 
   border-radius: 50%;
   background-image: linear-gradient(
-    ${({ type }) => {
-      return getPrimaryColor(type === 'waiting' ? type : 'shadow');
+    ${({ gameState, player }) => {
+      return getPrimaryColor(
+        gameState === 'waiting' ? gameState : 'shadow',
+        player
+      );
     }}
   );
 

@@ -12,9 +12,9 @@ function Main() {
   const { playerChoice, gameState, opponentChoice } = gameCtx;
   const ready = (
     <>
-      <GameElement type="paper" gameId="1" />
-      <GameElement type="scissors" gameId="2" />
-      <GameElement type="rock" gameId="3" />
+      <GameElement type="paper" gameId="1" gameState={gameCtx.gameState} />
+      <GameElement type="scissors" gameId="2" gameState={gameCtx.gameState} />
+      <GameElement type="rock" gameId="3" gameState={gameCtx.gameState} />
     </>
   );
   const waiting = (
@@ -24,12 +24,17 @@ function Main() {
         <GameElement
           type={options[playerChoice]}
           gameId={playerChoice}
+          gameState={gameCtx.gameState}
           player
         />
       </Container>
       <Container>
         <GameElementLabel>Opponent Choice</GameElementLabel>
-        <GameElement type="waiting" gameId={opponentChoice} />
+        <GameElement
+          type="waiting"
+          gameId={opponentChoice}
+          gameState={gameCtx.gameState}
+        />
       </Container>
     </>
   );
@@ -41,6 +46,7 @@ function Main() {
         <GameElement
           type={options[playerChoice]}
           gameId={playerChoice}
+          gameState={gameCtx.gameState}
           player
         />
       </Container>
@@ -49,7 +55,11 @@ function Main() {
       </Container> */}
       <Container>
         <GameElementLabel>Opponent Choice</GameElementLabel>
-        <GameElement type={options[opponentChoice]} gameId={opponentChoice} />
+        <GameElement
+          type={options[opponentChoice]}
+          gameId={opponentChoice}
+          gameState={gameCtx.gameState}
+        />
       </Container>
     </>
   );
