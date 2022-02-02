@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import GameElement from '../../GameElement/GameElement';
 import GameContext from '../../store/GameContext';
 import StyledMain from './StyledMain.styles';
@@ -6,99 +6,66 @@ import Container from '../../Container/Container';
 import GameResult from '../../GameResult/GameResult';
 
 function Main() {
-  const options = { 1: 'paper', 2: 'scissors', 3: 'rock' };
+  const [showResult, setShowResult] = useState(false);
+  // const firstRender = useRef(true);
+  const [firstRender, setFirstRender] = useState(false);
   const gameCtx = useContext(GameContext);
   const { playerChoice, gameState, opponentChoice } = gameCtx;
-  const ready = (
-    <>
-      <GameElement type="paper" gameId="1" gameState={gameCtx.gameState} />
-      <GameElement type="scissors" gameId="2" gameState={gameCtx.gameState} />
-      <GameElement type="rock" gameId="3" gameState={gameCtx.gameState} />
-    </>
-  );
-  const waiting = (
-    <>
-      <Container>
-        <GameElement
-          labelText="Your Choice"
-          type={options[playerChoice]}
-          gameId={playerChoice}
-          gameState={gameCtx.gameState}
-          player
-        />
-      </Container>
-      <Container>
-        <GameElement
-          labelText="Opponent Choice"
-          type="waiting"
-          gameId={opponentChoice}
-          gameState={gameCtx.gameState}
-        />
-      </Container>
-    </>
-  );
 
-  const result = (
-    <>
-      <Container>
-        <GameElement
-          labelText="Your Choice"
-          type={options[playerChoice]}
-          gameId={playerChoice}
-          gameState={gameCtx.gameState}
-          player
-        />
-      </Container>
-      {/* <Container>
-        <GameResult />
-      </Container> */}
-      <Container>
-        <GameElement
-          labelText="Opponent Choice"
-          type={options[opponentChoice]}
-          gameId={opponentChoice}
-          gameState={gameCtx.gameState}
-        />
-      </Container>
-    </>
-  );
-
-  // {gameState === 'ready' && !playerChoice && ready}
-  // {gameState === 'waiting' && waiting}
-  // {gameState === 'result' && result}
-
+  const options = { 1: 'paper', 2: 'scissors', 3: 'rock' };
   const playerOptions = {
     type: !playerChoice ? 'paper' : options[playerChoice],
     gameId: !playerChoice ? 1 : playerChoice,
-    gameState: gameCtx.gameState,
+    gameState,
     player: !!playerChoice,
+    labelText: 'Player Choice',
   };
-  console.log('🚀 ~ Main ~ playerOptions', playerOptions);
 
   const opponentOptions = {
     type: !opponentChoice ? 'scissors' : options[opponentChoice],
     gameId: !opponentChoice ? 2 : opponentChoice,
-    gameState: gameCtx.gameState,
+    gameState,
     player: false,
+    labelText: 'Opponent Choice',
   };
-  console.log('🚀 ~ Main ~ opponentOptions', opponentOptions);
+
+  const showResultReasons = gameState === 'result';
+  let timer;
+  useEffect(() => {
+    const timeoutShow = async () => {
+      timer = setTimeout(() => {
+        setShowResult(true);
+      }, 1000);
+    };
+    if (firstRender) return;
+    if (gameState === 'ready') {
+      setShowResult(false);
+    }
+    if (gameState === 'result') timeoutShow();
+    setFirstRender(false);
+    // firstRender.current = false;
+
+    return () => clearTimeout(timer);
+  }, [showResultReasons]);
+
   return (
     <StyledMain gameState={gameState}>
-      <GameElement {...playerOptions} />
-      <GameElement {...opponentOptions} />
+      <Container>
+        <GameElement {...playerOptions} />
+      </Container>
+      {showResult && (
+        <Container>
+          <GameResult />
+        </Container>
+      )}
+      <Container>
+        <GameElement {...opponentOptions} />
+      </Container>
       {gameState === 'ready' && (
         <GameElement type="rock" gameId="3" gameState={gameCtx.gameState} />
       )}
     </StyledMain>
   );
-
-  // return (
-  //   <StyledMain gameState={gameState}>
-  //     {gameState === 'ready' && !playerChoice && ready}
-  //     {gameState === 'waiting' && waiting}
-  //     {gameState === 'result' && result}
-  //   </StyledMain>
-  // );
 }
 
 export default Main;
