@@ -7,8 +7,7 @@ import GameResult from '../../GameResult/GameResult';
 
 function Main() {
   const [showResult, setShowResult] = useState(false);
-  // const firstRender = useRef(true);
-  const [firstRender, setFirstRender] = useState(false);
+  const firstRender = useRef(true);
   const gameCtx = useContext(GameContext);
   const { playerChoice, gameState, opponentChoice } = gameCtx;
 
@@ -32,18 +31,20 @@ function Main() {
   const showResultReasons = gameState === 'result';
   let timer;
   useEffect(() => {
-    const timeoutShow = async () => {
+    const timeoutShowResults = async () => {
       timer = setTimeout(() => {
         setShowResult(true);
       }, 1000);
     };
-    if (firstRender) return;
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
     if (gameState === 'ready') {
       setShowResult(false);
     }
-    if (gameState === 'result') timeoutShow();
-    setFirstRender(false);
-    // firstRender.current = false;
+    if (gameState === 'result') timeoutShowResults();
 
     return () => clearTimeout(timer);
   }, [showResultReasons]);

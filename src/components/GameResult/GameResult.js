@@ -6,6 +6,7 @@ function GameResult() {
   const gameCtx = useContext(GameContext);
   const { winner } = gameCtx;
 
+  // TODO: add styled, create Results component
   return (
     <div>
       {/* <Result winner={winner} /> */}
