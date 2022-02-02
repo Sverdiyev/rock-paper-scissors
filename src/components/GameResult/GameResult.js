@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Reset from '../Reset/Reset.styles';
+import Reset from '../Reset/Reset';
 import GameContext from '../store/GameContext';
 
 function GameResult() {

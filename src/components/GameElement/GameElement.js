@@ -43,7 +43,6 @@ function GameElement({ type, gameId, labelText, player = false }) {
     isTransparent,
   };
 
-  console.log('🚀 ~ GameElement ~ options', options);
   const showPicture = gameState !== 'waiting' || player;
 
   return (
