@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import GameElement from '../../GameElement/GameElement';
 import GameContext from '../../store/GameContext';
-import StyledMain from './StyledMain.styles';
+import StyledMain, { HorizontalContainer } from './StyledMain.styles';
 import Container from '../../Container/Container';
 import GameResult from '../../GameResult/GameResult';
 
@@ -38,7 +38,7 @@ function Main() {
     const timeoutShowResults = async () => {
       timer = setTimeout(() => {
         setShowResult(true);
-      }, 1000);
+      }, 500);
     };
 
     if (gameState === 'ready') setShowResult(false);
@@ -48,21 +48,22 @@ function Main() {
     return () => clearTimeout(timer);
   }, [showResultReasons]);
 
+  console.log('🚀 ~ Main ~ showResult', showResult);
   return (
     <StyledMain gameState={gameState}>
-      <Container>
-        <GameElement {...playerOptions} />
-      </Container>
-      {showResult && (
+      <HorizontalContainer showResult={showResult}>
         <Container>
-          <GameResult />
+          <GameElement {...playerOptions} />
         </Container>
-      )}
-      <Container>
-        <GameElement {...opponentOptions} />
-      </Container>
+        {showResult && <GameResult />}
+        <Container>
+          <GameElement {...opponentOptions} />
+        </Container>
+      </HorizontalContainer>
       {gameState === 'ready' && (
-        <GameElement type="rock" gameId="3" gameState={gameState} />
+        <HorizontalContainer>
+          <GameElement type="rock" gameId="3" gameState={gameState} />
+        </HorizontalContainer>
       )}
     </StyledMain>
   );
