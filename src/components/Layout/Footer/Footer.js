@@ -6,7 +6,6 @@ import StyledFooter from './StyledFooter.styles';
 function Footer() {
   return (
     <StyledFooter>
-      <Reset />
       <Rules />
     </StyledFooter>
   );
