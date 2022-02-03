@@ -48,7 +48,8 @@ function Main() {
     return () => clearTimeout(timer);
   }, [showResultReasons]);
 
-  console.log('🚀 ~ Main ~ showResult', showResult);
+  // TODO: add Rules
+
   return (
     <StyledMain gameState={gameState}>
       <HorizontalContainer showResult={showResult}>

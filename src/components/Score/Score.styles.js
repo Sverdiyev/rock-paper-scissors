@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledDiv = styled.div`
   /* margin: 1.8rem 2.5rem; */
-  background-color: white; //FIXME: add gradient later
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
