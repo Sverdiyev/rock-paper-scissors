@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledReset = styled.button`
-  color: ${(p) => p.theme.colors.dark};
+  color: ${(p) => (p.$winner === 'player' ? p.theme.colors.dark : 'red')};
   background-color: white;
   padding: 1.5rem 5.5rem;
   width: 22rem;

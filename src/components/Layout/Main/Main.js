@@ -31,19 +31,18 @@ function Main() {
   const showResultReasons = gameState === 'result';
   let timer;
   useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
     const timeoutShowResults = async () => {
       timer = setTimeout(() => {
         setShowResult(true);
       }, 1000);
     };
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
 
-    if (gameState === 'ready') {
-      setShowResult(false);
-    }
+    if (gameState === 'ready') setShowResult(false);
+
     if (gameState === 'result') timeoutShowResults();
 
     return () => clearTimeout(timer);
@@ -63,7 +62,7 @@ function Main() {
         <GameElement {...opponentOptions} />
       </Container>
       {gameState === 'ready' && (
-        <GameElement type="rock" gameId="3" gameState={gameCtx.gameState} />
+        <GameElement type="rock" gameId="3" gameState={gameState} />
       )}
     </StyledMain>
   );
