@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import GameElement from '../../GameElement/GameElement';
-import GameContext from '../../store/GameContext';
+import GameContext from '../../../store/GameContext';
 import StyledMain, { HorizontalContainer } from './StyledMain.styles';
 import Container from '../../Container/Container';
 import GameResult from '../../GameResult/GameResult';

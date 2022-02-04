@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import GameContext from '../store/GameContext';
+import GameContext from '../../store/GameContext';
 import StyledSpan from './Result.styles';
 
 function Result() {

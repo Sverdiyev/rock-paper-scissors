@@ -9,7 +9,7 @@ import Circle, {
 import rock from '../../assets/images/icon-rock.svg';
 import paper from '../../assets/images/icon-paper.svg';
 import scissors from '../../assets/images/icon-scissors.svg';
-import GameContext from '../store/GameContext';
+import GameContext from '../../store/GameContext';
 import GameElementLabel from '../GameElementLabel/GameElementLabel';
 
 function GameElement({ type, gameId, labelText, player = false }) {

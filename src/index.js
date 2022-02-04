@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 import App from './App';
-import { GameContextProvider } from './components/store/GameContextProvider';
+import GameContextProvider from './store/GameContextProvider';
 import GlobalStyles from './styles/GlobalStyles';
 import theme from './styles/theme';
 
