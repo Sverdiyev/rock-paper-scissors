@@ -28,6 +28,7 @@
     "no-console": "off",
     "react/prop-types": "off",
     "consistent-return": "off",
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "import/no-named-as-default": 0
   }
 }

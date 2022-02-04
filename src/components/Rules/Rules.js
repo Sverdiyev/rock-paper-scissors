@@ -1,11 +1,14 @@
 import React from 'react';
-import StyledDiv from './Rules.styles';
+import { createPortal } from 'react-dom';
+import RulesModal from '../RulesModal/RulesModal';
+import StyledButton from './Rules.styles';
 
 function Rules() {
   return (
-    <StyledDiv>
-      <span>rules</span>
-    </StyledDiv>
+    <>
+      <RulesModal />
+      <StyledButton>rules</StyledButton>
+    </>
   );
 }
 
