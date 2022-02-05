@@ -4,9 +4,10 @@ import StyledReset from './Reset.styles';
 
 function Reset() {
   const gameCtx = useContext(GameContext);
+  const { resetGame, winner } = gameCtx;
 
   return (
-    <StyledReset type="button" onClick={gameCtx.resetGame}>
+    <StyledReset type="button" onClick={resetGame} $winner={winner}>
       Play Again
     </StyledReset>
   );

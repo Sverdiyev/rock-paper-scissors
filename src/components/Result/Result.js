@@ -19,7 +19,7 @@ function Result() {
       message = 'draw';
   }
 
-  return <StyledSpan $winner>{message}</StyledSpan>;
+  return <StyledSpan $winner={winner}>{message}</StyledSpan>;
 }
 
 export default Result;

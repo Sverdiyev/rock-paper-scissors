@@ -41,7 +41,6 @@ const reducer = (state, action) => {
   }
 
   if (action.type === ACTIONS.HIDE_MODAL) newState.modalVisible = false;
-  console.log('🚀 ~ reducer ~ action.type', action.type);
 
   if (action.type === ACTIONS.SHOW_MODAL) newState.modalVisible = true;
 
@@ -61,7 +60,6 @@ export function GameContextProvider({ children }) {
     }
     dispatch({ type: ACTIONS.SET_PLAYER_CHOICE, value: choice });
     setTimeout(() => {
-      console.log('delayed');
       dispatch({ type: ACTIONS.RESULT });
     }, 1000);
   };
