@@ -1,6 +1,7 @@
 # Rock Paper Scissors game
 
-The project design was taken from Frontend Mentor, some details were changed.
+The project design was taken from Frontend Mentor website, some details were changed.
+All the code was written by me. 
 
 ## Main Aims
 
