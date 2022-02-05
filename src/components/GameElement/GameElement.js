@@ -37,10 +37,12 @@ function GameElement({ type, gameId, labelText, player = false }) {
 
   const isBig = gameState !== 'ready';
   const isTransparent = gameState === 'waiting' && !player;
+  const showPointer = gameState === 'ready';
   const options = {
     type,
     isBig,
     isTransparent,
+    showPointer,
   };
 
   const showPicture = gameState !== 'waiting' || player;

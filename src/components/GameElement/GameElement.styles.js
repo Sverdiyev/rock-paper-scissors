@@ -28,8 +28,8 @@ const getAwaitingColor = () => {
 
 export const OuterCircle = styled.div`
   ${(p) => {
-    if (p.gameState === 'result') {
-      return '';
+    if (p.showPointer) {
+      return 'cursor: pointer;';
     }
   }}
 
@@ -45,8 +45,6 @@ export const OuterCircle = styled.div`
     (theme.deviceWidth * (!isBig ? 198 : 292)) / 10}rem;
   height: ${({ theme, isBig }) =>
     (theme.deviceWidth * (!isBig ? 203 : 300)) / 10}rem;
-
-  cursor: pointer;
 `;
 
 const Circle = styled.div`
