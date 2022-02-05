@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createPortal } from 'react-dom';
-import Backdrop, { RulesContainer } from './RulesModal.styles';
+import Backdrop, {
+  ActionsContainer,
+  RulesContainer,
+} from './RulesModal.styles';
 import rules from '../../assets/images/image-rules.svg';
+import GameContext from '../../store/GameContext';
 
 function RulesModal() {
+  const gameCtx = useContext(GameContext);
+  const closeModal = () => {
+    gameCtx.hideModal();
+  };
   return createPortal(
-    <Backdrop>
+    <Backdrop onClick={closeModal}>
       <RulesContainer>
-        <div>
+        <ActionsContainer>
           <span>rules</span>
-          <button type="button"> CLOSE </button>
-        </div>
+          <button type="button" onClick={closeModal}>
+            {String.fromCharCode('10006')}
+          </button>
+        </ActionsContainer>
         <img src={rules} alt="rules" />
       </RulesContainer>
     </Backdrop>,

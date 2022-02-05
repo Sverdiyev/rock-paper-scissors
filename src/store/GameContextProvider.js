@@ -6,6 +6,8 @@ const ACTIONS = {
   SET_PLAYER_CHOICE: 'setPlayerChoice',
   RESET: 'reset',
   RESULT: 'result',
+  SHOW_MODAL: 'showModal',
+  HIDE_MODAL: 'hideModal',
 };
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
   score: 0,
   gameState: 'ready',
   gameFinished: false,
+  modalVisible: false,
 };
 
 const reducer = (state, action) => {
@@ -36,6 +39,12 @@ const reducer = (state, action) => {
     );
     if (newState.winner === 'player') newState.score = state.score + 1;
   }
+
+  if (action.type === ACTIONS.HIDE_MODAL) newState.modalVisible = false;
+  console.log('🚀 ~ reducer ~ action.type', action.type);
+
+  if (action.type === ACTIONS.SHOW_MODAL) newState.modalVisible = true;
+
   return {
     ...state,
     ...newState,
@@ -56,12 +65,18 @@ export function GameContextProvider({ children }) {
       dispatch({ type: ACTIONS.RESULT });
     }, 1000);
   };
+
+  const showModal = () => dispatch({ type: ACTIONS.SHOW_MODAL });
+  const hideModal = () => dispatch({ type: ACTIONS.HIDE_MODAL });
+
   const resetGame = () => dispatch({ type: ACTIONS.RESET });
   /* eslint-disable */ //FIXME: figure out what to do here
   const contextValue = {
     ...state,
     setPlayerChoice,
     resetGame,
+    showModal,
+    hideModal,
   };
 
   // useEffect(async () => {

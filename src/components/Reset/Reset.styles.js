@@ -12,6 +12,7 @@ const StyledReset = styled.button`
   font-weight: 600;
   border: none;
   border-radius: 0.8rem;
+  cursor: pointer;
 `;
 
 export default StyledReset;
